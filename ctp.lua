@@ -57,11 +57,13 @@ local inputServ = game:GetService("UserInputService")
 inputServ.InputBegan:Connect(function(insidious, kamToReikia)
     if insidious.UserInputType == Enum.UserInputType.Keyboard then
         if insidious.KeyCode == Enum.KeyCode.X then
-            local mouse = plr:GetMouse()
-            local pos = mouse.Hit + Vector3.new(0,2.5,0)
-            pos = CFrame.new(pos.X,pos.Y,pos.Z)
-            plr.Character.HumanoidRootPart.CFrame = pos
-            savedPos = pos
+            if not game.CoreGui:FindFirstChild("ni") == nil then
+                local mouse = plr:GetMouse()
+                local pos = mouse.Hit + Vector3.new(0,2.5,0)
+                pos = CFrame.new(pos.X,pos.Y,pos.Z)
+                plr.Character.HumanoidRootPart.CFrame = pos
+                savedPos = pos
+            end
         end
     end
 end)
