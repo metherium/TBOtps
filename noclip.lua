@@ -64,21 +64,26 @@ mouse.KeyDown:Connect(function(key)
     end
 end)
 
-rs.Stepped:Connect(function()
+local parts = {}
+plr.Character.Head.touched:Connect(function(hit)
     if noclip then
-        plr.
+        hit.CanCollide = false
+        table.insert(parts,1,hit)
     end
 end)
 
 bu.MouseButton1Click:Connect(function()
     if noclip then
-       msg.Text = "TBO Noclip Disabled, press T to destroy this message"
-       bu.Text = "Enable"
-       noclip = false
+        msg.Text = "TBO Noclip Disabled, press T to destroy this message"
+        bu.Text = "Enable"
+        noclip = false
+        for i, v in pairs(parts) do
+            v.CanCollide = true
+            table.remove(parts, 1)
+        end
     else
        msg.Text = "TBO Noclip Enabled, press T to destroy this message"
        bu.Text = "Disable"
        noclip = true
     end
 end)
-
